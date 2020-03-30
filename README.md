@@ -6,6 +6,6 @@
 
 **24/3:** Jag åkte till skolan för att felsöka motorn, vilket lyckades. Genom att byta ut baskortet kom motorn igång. Därefter ägnade jag en ganska lång stund till att bygga chassit till min bil, samt montera motorn. Slutligen hann jag arbeta lite mer på hemsidan. Jag satte även upp en planner.
 
-**25/3:** Studieverkstad.
-
 **27/3:** Pythonprojektet. Arbetade med exceluppgiften. 
+
+**30/3:** 
