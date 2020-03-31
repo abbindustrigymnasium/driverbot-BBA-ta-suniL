@@ -8,4 +8,6 @@
 
 **27/3:** Pythonprojektet. Arbetade med exceluppgiften. 
 
-**30/3:** 
+**30/3:** Hemsida till robotprojektet.
+
+**31/3:** Hemsida till robotprojektet.
