@@ -1,7 +1,8 @@
 <template>
   <v-card 
-    max-width="500" 
-    flat color="teal"
+    width="700" 
+    height="400"
+    flat color="blue"
     class="mx-auto"
   >
   <v-container fluid>
@@ -9,24 +10,25 @@
       <v-col cols="12">
         <v-subheader class="pl-0">Speed</v-subheader>
         <v-slider
-          v-model="slider"
+          min="-50"
+          max="50"
+          v-model="slider"  
           thumb-label
+          step="10"
         ></v-slider>
       </v-col>
     </v-row>
   </v-container>
-  <v-container>
+  <v-container fluid>
     <v-row>
-      <v-slider
-        v-model="value"
-        vertical
-        label="Regular"
-      ></v-slider>
-      <v-range-slider
-        v-model="value2"
-        vertical
-        label="Range"
-      ></v-range-slider>
+      <v-col cols="12">
+        <v-subheader class="pl-0">Steering</v-subheader>
+        <v-slider
+          v-model="slider"
+          vertical
+          thumb-label
+        ></v-slider>
+      </v-col>
     </v-row>
   </v-container>
   </v-card>
@@ -50,7 +52,12 @@ export default {
       client: null,
       speed: 600,
       ticklabels: ["Långsamt", "Snabbare", "Snabbast"],
-      options: {}
+      options: {},
+
+      slider: "0",
+      sliderValues: {
+        value: label.value
+      }
     };
   },
   computed: {

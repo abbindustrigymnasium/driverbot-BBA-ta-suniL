@@ -1,5 +1,4 @@
 #include "EspMQTTClient.h"
-//Install libraries PubSubClient and EspMQTTClient
 #include <Servo.h>
 
 Servo servo;
@@ -7,8 +6,8 @@ Servo servo;
 void onConnectionEstablished();
 
 EspMQTTClient client(
-  "ABB_Indgym_Guest",           // Wifi ssid
-  "Welcome2abb",           // Wifi password
+  "Olofsson_Guest",           // Wifi ssid
+  "79Bj4a76",           // Wifi password
   "maqiatto.com",  // MQTT broker ip
   1883,             // MQTT broker port
   "linus.olofsson@abbindustrigymnasium.se",            // MQTT username
@@ -40,6 +39,9 @@ void setup() {
 }
 
 bool off = false;
+int speed = 0;
+int degrees = 0;
+int dir = 0;
 
 void turn(bool left, int degrees) {
 
@@ -93,45 +95,38 @@ void drive(bool dir, int speed) {
 
 }
 
-void onConnectionEstablished()
-{
 
-  client.subscribe("joakim.flink@abbindustrigymnasium.se/drive", [] (const String & payload)
+
+void onConnectionEstablished(){
+
+  client.subscribe("linus.olofsson@abbindustrigymnasium.se/speed", [] (const String & payload)
   {
-
-    char info = payload.charAt(0);
-    int length = payload.length();
-    String value = payload.substring(1, length);
-    int speed = value.toInt();
-    if (info == 'f' || info == 'b'  )
-    {
-      bool dir = false;
-      if (info == 'f')
-        dir = true;
-      drive(dir, speed);
-    }
-    else if (info == 'r' || info == 'l'  )
-    {
-      bool dir = false;
-      if (info == 'l')
-        dir = true;
-      turn(dir, speed);
-    }
+    speed = payload.toInt()*100+500;
     Serial.println(payload);
 
   });
 
-  client.publish("joakim.flink@abbindustrigymnasium.se/drive", "This is a message");
+    client.subscribe("linus.olofsson@abbindustrigymnasium.se/direction", [] (const String & payload){
+      
+    dir = payload.toInt();
+    Serial.println(payload);
 
-  client.executeDelayed(5 * 1000, []() {
-    client.publish("joakim.flink@abbindustrigymnasium.se/drive", "This is a message sent 5 seconds later");
   });
-}
 
+/*    client.subscribe("linus.olofsson@abbindustrigymnasium.se/steering", [] (const String & payload)
+  {
+    speed = payload.toInt()*100+600;
+    Serial.println(payload);
+
+  });*/
+
+}
 
 void loop() {
 
-
-  // put your main code here, to run repeatedly:
   client.loop();
+
+  digitalWrite(motorPinRightDir, dir);
+  analogWrite(motorPinRightSpeed, speed);
+  
 }
