@@ -11,3 +11,6 @@
 **30/3:** Hemsida till robotprojektet.
 
 **31/3:** Hemsida till robotprojektet.
+
+**28/4:** Åkte in till skolan för att 3D-printa servohållare, servoadapter och bygga klart roboten.
+ 
