@@ -16,7 +16,7 @@
             color="teal"
             icon
             :disabled="!connected"
-            @click="Send('drive','l45')"
+            v-on:click="Send('speed','l45')"
           >
             <v-icon>keyboard_arrow_left</v-icon>
           </v-btn>
@@ -27,7 +27,7 @@
             color="teal"
             icon
             :disabled="!connected"
-            @click="Send('drive','f'+speed)"
+            @click="Send('speed','f'+speed)"
           >
             <v-icon>keyboard_arrow_up</v-icon>
           </v-btn>
@@ -38,7 +38,7 @@
             color="teal"
             icon
             :disabled="!connected"
-            @click="Send('drive','r45')"
+            @click="Send('speed','r45')"
           >
             <v-icon>keyboard_arrow_left</v-icon>
           </v-btn>
@@ -58,7 +58,7 @@
             color="teal"
             icon
             :disabled="!connected"
-            @click="Send('drive','l90')"
+            @click="Send('speed','l90')"
           >
             <v-icon>keyboard_arrow_left</v-icon>
           </v-btn>
@@ -79,7 +79,7 @@
             color="teal"
             icon
             :disabled="!connected"
-            @click="Send('drive','r90')"
+            @click="Send('speed','r90')"
           >
             <v-icon>keyboard_arrow_right</v-icon>
           </v-btn>
@@ -98,7 +98,7 @@
             color="teal"
             icon
             :disabled="!connected"
-            @click="Send('drive','l135')"
+            @click="Send('speed','l135')"
           >
             <v-icon>keyboard_arrow_down</v-icon>
           </v-btn>
@@ -109,7 +109,7 @@
             color="teal"
             icon
             :disabled="!connected"
-            @click="Send('drive','b'+speed)"
+            @click="Send('speed','b'+speed)"
           >
             <v-icon>keyboard_arrow_down</v-icon>
           </v-btn>
@@ -120,7 +120,7 @@
             color="teal"
             icon
             :disabled="!connected"
-            @click="Send('drive','r135')"
+            @click="Send('speed','r135')"
           >
             <v-icon>keyboard_arrow_up</v-icon>
           </v-btn>
@@ -198,6 +198,7 @@ export default {
       var url = "mqtt://" + mqtt_url;
       var options = {
         port: User.port,
+        topic: User.topic,
         clientId: this.clientId,
         username: User.name,
         password: User.password
@@ -248,7 +249,7 @@ export default {
     Send(adress, message) {
       // console.log(message);
       this.client.publish(
-        this.options.username + "/" + adress, //Exempel         "joakim.flink@abbindustrigymnasium.se"+"/" + "drive",
+        this.options.username + "/" + this.options.topic, //adress, //Exempel         "joakim.flink@abbindustrigymnasium.se"+"/" + "drive",
         message
       );
 

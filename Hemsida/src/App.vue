@@ -16,14 +16,15 @@
 
     <v-content>
       <v-row align="center" justify="center">
-        <v-dialog v-model="dialog" max-width="290" height="290">
+        <v-dialog v-model="dialog" max-width="400" height="290">
           <v-card>
             <v-card-title class="headline">Anslutning till Server</v-card-title>
 
-            <v-card-text style="height: 300px;">
+            <v-card-text style="height: 370px;">
               <v-text-field v-model="name" label="Name" filled></v-text-field>
 
               <v-text-field v-model="password" label="MQTT Password" filled></v-text-field>
+              <v-text-field v-model="topic" label="MQTT topic" filled></v-text-field>
 
               <v-text-field v-model="port" label="Port" filled></v-text-field>
               <v-text-field v-model="adress" label="Adress" filled></v-text-field>
@@ -32,7 +33,7 @@
             <v-card-actions>
               <v-spacer></v-spacer>
 
-              <v-btn color="green darken-1" text @click="save()">Spara</v-btn>
+              <v-btn color="blue" text @click="save()">Spara</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -66,6 +67,7 @@ export default {
       dialog: false,
       name: "",
       password: "",
+      topic: "",
       port: "",
       adress: ""
     };
@@ -74,6 +76,7 @@ export default {
     let User = this.$store.getters.GetUser;
     this.name = User.name;
     this.password = User.password;
+    this.topic = User.topic;
     this.port = User.port;
     this.adress = User.adress;
   },
@@ -83,6 +86,7 @@ export default {
       let User = {
         name: this.name,
         password: this.password,
+        topic: this.topic,
         port: this.port,
         adress: this.adress
       };

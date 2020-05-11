@@ -14,6 +14,7 @@ const state = {
     name: "linus.olofsson@abbindustrigymnasium.se",
     password: "robotbil123",
     port: 8883,
+    topic:"speed",
     adress: "maqiatto.com"
   }
 }

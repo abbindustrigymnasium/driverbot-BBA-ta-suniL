@@ -101,24 +101,40 @@ void onConnectionEstablished(){
 
   client.subscribe("linus.olofsson@abbindustrigymnasium.se/speed", [] (const String & payload)
   {
-    speed = payload.toInt()*100+500;
-    Serial.println(payload);
+
+    if (payload.startsWith("h-")){
+      char info = payload.charAt(0);
+      int length = payload.length();
+      String value = payload.substring(2, length);
+      speed = value.toInt()*20;
+      dir = 0;
+      Serial.println(speed);
+    }
+      else if (payload.startsWith("h")){   
+      char info = payload.charAt(0);
+      int length = payload.length();
+      String value = payload.substring(1, length);
+      speed = value.toInt()*20;
+      dir = 1;
+      Serial.println(speed);
+    }
+    else if (payload.startsWith("h")){   
+      char info = payload.charAt(0);
+      int length = payload.length();
+      String value = payload.substring(1, length);
+      degrees = value.toInt();
+      Serial.println(degrees);
+    }
+    else {   
+      char info = payload.charAt(0);
+      int length = payload.length();
+      String value = payload.substring(1, length);
+      degrees = value.toInt();
+      Serial.println(degrees);
+    }
+
 
   });
-
-    client.subscribe("linus.olofsson@abbindustrigymnasium.se/direction", [] (const String & payload){
-      
-    dir = payload.toInt();
-    Serial.println(payload);
-
-  });
-
-/*    client.subscribe("linus.olofsson@abbindustrigymnasium.se/steering", [] (const String & payload)
-  {
-    speed = payload.toInt()*100+600;
-    Serial.println(payload);
-
-  });*/
 
 }
 

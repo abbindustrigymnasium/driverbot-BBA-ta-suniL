@@ -1,10 +1,12 @@
 <template>
+  <v-container>
   <v-card 
+
     width="700" 
     height="400"
-    flat color="blue"
+    flat color="white"
     class="mx-auto"
-  >
+    >
   <v-container fluid>
     <v-row>
       <v-col cols="12">
@@ -12,9 +14,10 @@
         <v-slider
           min="-50"
           max="50"
-          v-model="slider"  
+          v-model="hastighet"  
           thumb-label
           step="10"
+          @change="Send('h' + hastighet)"                    
         ></v-slider>
       </v-col>
     </v-row>
@@ -24,14 +27,18 @@
       <v-col cols="12">
         <v-subheader class="pl-0">Steering</v-subheader>
         <v-slider
-          v-model="slider"
-          vertical
+          min="-90"
+          max="90"
+          step="30"
+          v-model="styrning"
           thumb-label
+          v-on:change="Send('s' + styrning)"
         ></v-slider>
       </v-col>
-    </v-row>
+    </v-row> 
   </v-container>
   </v-card>
+  </v-container>
 </template>
 
 
@@ -54,10 +61,8 @@ export default {
       ticklabels: ["Långsamt", "Snabbare", "Snabbast"],
       options: {},
 
-      slider: "0",
-      sliderValues: {
-        value: label.value
-      }
+      //speedvalue: "slider",
+      //dirvalue: "slider2",
     };
   },
   computed: {
@@ -80,6 +85,10 @@ export default {
       }
     }
   },
+   created() {
+    //När komponenten är skapad
+    this.Connect()
+  },
   methods: {
     //Metoder
     Connect() {
@@ -98,6 +107,7 @@ export default {
       var url = "mqtt://" + mqtt_url;
       var options = {
         port: User.port,
+        topic: User.topic,
         clientId: this.clientId,
         username: User.name,
         password: User.password
@@ -134,10 +144,10 @@ export default {
       }
     },
 
-    Send(adress, message) {
-      // console.log(message);
+    Send(message) {
+      //console.log(message);
       this.client.publish(
-        this.options.username + "/" + "speed", //adress, //Exempel         "joakim.flink@abbindustrigymnasium.se"+"/" + "drive",
+        this.options.username + "/" + this.options.topic, //Exempel         "joakim.flink@abbindustrigymnasium.se"+"/" + "drive",
         message
       );
 
