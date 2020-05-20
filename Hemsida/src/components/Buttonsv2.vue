@@ -4,7 +4,7 @@
     <v-card class="elevation-12" color="grey lighten-1">
       <v-layout row>
         <v-flex class="justify-center mb-6">
-          <v-btn class="ma-2" v-if="connected" tile color="red" icon @click="speed=500">
+          <v-btn class="ma-2" v-if="connected" tile color="red" icon @click="speed=25">
             50
             <v-icon>directions_car</v-icon>
           </v-btn>
@@ -16,7 +16,7 @@
             color="teal"
             icon
             :disabled="!connected"
-            v-on:click="Send('speed','l45')"
+            v-on:click="Send('s30')"
           >
             <v-icon>keyboard_arrow_left</v-icon>
           </v-btn>
@@ -27,7 +27,7 @@
             color="teal"
             icon
             :disabled="!connected"
-            @click="Send('speed','f'+speed)"
+            @click="Send('h'+speed)"
           >
             <v-icon>keyboard_arrow_up</v-icon>
           </v-btn>
@@ -38,12 +38,12 @@
             color="teal"
             icon
             :disabled="!connected"
-            @click="Send('speed','r45')"
+            @click="Send('s-30')"
           >
             <v-icon>keyboard_arrow_left</v-icon>
           </v-btn>
 
-          <v-btn class="ma-2" tile v-if="connected" color="blue" icon @click="speed=700">
+          <v-btn class="ma-2" tile v-if="connected" color="blue" icon @click="speed=35">
             70
             <v-icon>directions_car</v-icon>
           </v-btn>
@@ -58,7 +58,7 @@
             color="teal"
             icon
             :disabled="!connected"
-            @click="Send('speed','l90')"
+            @click="Send('s60')"
           >
             <v-icon>keyboard_arrow_left</v-icon>
           </v-btn>
@@ -67,7 +67,7 @@
           <v-btn v-if="!connected" class="ma-2" tile large :color="car" icon @click="Connect()">
             <v-icon>directions_car</v-icon>
           </v-btn>
-          <v-btn v-else class="ma-2" tile large :color="car" icon @click="Send('drive','f0')">
+          <v-btn v-else class="ma-2" tile large :color="car" icon @click="Send('stop')">
             <v-icon>pause</v-icon>
           </v-btn>
         </v-flex>
@@ -79,7 +79,7 @@
             color="teal"
             icon
             :disabled="!connected"
-            @click="Send('speed','r90')"
+            @click="Send('s-60')"
           >
             <v-icon>keyboard_arrow_right</v-icon>
           </v-btn>
@@ -87,7 +87,7 @@
       </v-layout>
       <v-layout row>
         <v-flex class="justify-center mb-6">
-          <v-btn class="ma-2" v-if="connected" tile color="green" icon @click="speed=800">
+          <v-btn class="ma-2" v-if="connected" tile color="green" icon @click="speed=40">
             80
             <v-icon>directions_car</v-icon>
           </v-btn>
@@ -98,7 +98,7 @@
             color="teal"
             icon
             :disabled="!connected"
-            @click="Send('speed','l135')"
+            @click="Send('s90')"
           >
             <v-icon>keyboard_arrow_down</v-icon>
           </v-btn>
@@ -109,7 +109,7 @@
             color="teal"
             icon
             :disabled="!connected"
-            @click="Send('speed','b'+speed)"
+            @click="Send('h-'+speed)"
           >
             <v-icon>keyboard_arrow_down</v-icon>
           </v-btn>
@@ -120,12 +120,12 @@
             color="teal"
             icon
             :disabled="!connected"
-            @click="Send('speed','r135')"
+            @click="Send('s-90')"
           >
             <v-icon>keyboard_arrow_up</v-icon>
           </v-btn>
 
-          <v-btn class="ma-2" tile v-if="connected" color="purple" icon @click="speed=1000">
+          <v-btn class="ma-2" tile v-if="connected" color="purple" icon @click="speed=50">
             99
             <v-icon>directions_car</v-icon>
           </v-btn>
@@ -246,10 +246,10 @@ export default {
       }
     },
 
-    Send(adress, message) {
+    Send(message) {
       // console.log(message);
       this.client.publish(
-        this.options.username + "/" + this.options.topic, //adress, //Exempel         "joakim.flink@abbindustrigymnasium.se"+"/" + "drive",
+        this.options.username + "/" + this.options.topic, 
         message
       );
 

@@ -147,7 +147,7 @@ export default {
     Send(message) {
       //console.log(message);
       this.client.publish(
-        this.options.username + "/" + this.options.topic, //Exempel         "joakim.flink@abbindustrigymnasium.se"+"/" + "drive",
+        this.options.username + "/" + this.options.topic,
         message
       );
 

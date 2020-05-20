@@ -43,6 +43,8 @@ int speed = 0;
 int degrees = 0;
 int dir = 0;
 
+
+/*
 void turn(bool left, int degrees) {
 
   if (left == true)
@@ -95,12 +97,11 @@ void drive(bool dir, int speed) {
 
 }
 
-
+*/
 
 void onConnectionEstablished(){
 
-  client.subscribe("linus.olofsson@abbindustrigymnasium.se/speed", [] (const String & payload)
-  {
+  client.subscribe("linus.olofsson@abbindustrigymnasium.se/speed", [] (const String & payload){
 
     if (payload.startsWith("h-")){
       char info = payload.charAt(0);
@@ -109,8 +110,8 @@ void onConnectionEstablished(){
       speed = value.toInt()*20;
       dir = 0;
       Serial.println(speed);
-    }
-      else if (payload.startsWith("h")){   
+    } 
+    else if (payload.startsWith("h")){   
       char info = payload.charAt(0);
       int length = payload.length();
       String value = payload.substring(1, length);
@@ -118,18 +119,33 @@ void onConnectionEstablished(){
       dir = 1;
       Serial.println(speed);
     }
-    else if (payload.startsWith("h")){   
+    else if (payload.startsWith("st")){   
       char info = payload.charAt(0);
       int length = payload.length();
       String value = payload.substring(1, length);
-      degrees = value.toInt();
+      speed = 0;
+      Serial.println(degrees);
+    };
+    
+    if (payload.startsWith("s-")){   
+      char info = payload.charAt(0);
+      int length = payload.length();
+      String value = payload.substring(1, length);
+      degrees = value.toInt()+90;
       Serial.println(degrees);
     }
-    else {   
+    else if (payload.startsWith("s")){   
       char info = payload.charAt(0);
       int length = payload.length();
       String value = payload.substring(1, length);
-      degrees = value.toInt();
+      degrees = value.toInt()+90;
+      Serial.println(degrees);
+    }
+    else if (payload.startsWith("st")){   
+      char info = payload.charAt(0);
+      int length = payload.length();
+      String value = payload.substring(1, length);
+      degrees = 90;
       Serial.println(degrees);
     }
 
@@ -144,5 +160,6 @@ void loop() {
 
   digitalWrite(motorPinRightDir, dir);
   analogWrite(motorPinRightSpeed, speed);
+  servo.write(degrees);
   
 }
