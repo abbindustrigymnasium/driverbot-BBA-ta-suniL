@@ -5,7 +5,7 @@
       <v-layout row>
         <v-flex class="justify-center mb-6">
           <v-btn class="ma-2" v-if="connected" tile color="red" icon @click="speed=25">
-            50
+            25
             <v-icon>directions_car</v-icon>
           </v-btn>
 
@@ -44,7 +44,7 @@
           </v-btn>
 
           <v-btn class="ma-2" tile v-if="connected" color="blue" icon @click="speed=35">
-            70
+            35
             <v-icon>directions_car</v-icon>
           </v-btn>
         </v-flex>
@@ -88,7 +88,7 @@
       <v-layout row>
         <v-flex class="justify-center mb-6">
           <v-btn class="ma-2" v-if="connected" tile color="green" icon @click="speed=40">
-            80
+            40
             <v-icon>directions_car</v-icon>
           </v-btn>
           <v-btn
@@ -126,7 +126,7 @@
           </v-btn>
 
           <v-btn class="ma-2" tile v-if="connected" color="purple" icon @click="speed=50">
-            99
+            50
             <v-icon>directions_car</v-icon>
           </v-btn>
         </v-flex>
@@ -163,7 +163,6 @@ export default {
   computed: {
     Disconnect() {
       if (this.$store.getters.connected == false) {
-        // this.Send('drive','f0')
         return true;
       }
       return false;
