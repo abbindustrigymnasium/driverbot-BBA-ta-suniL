@@ -1,3 +1,4 @@
+//Nödvändiga bibliotek inkluderas.
 #include "EspMQTTClient.h"
 #include <Servo.h>
 
@@ -5,9 +6,11 @@ Servo servo;
 
 void onConnectionEstablished();
 
+//Klienten sätts upp. Wifi-ssid och lösenord för internetanslutning.
+//Info för att kunna ansluta till rätt MQTT-broker.
 EspMQTTClient client(
-  "Olofsson_Guest",           // Wifi ssid
-  "79Bj4a76",           // Wifi password
+  "...",           // Wifi ssid
+  "...",           // Wifi password
   "maqiatto.com",  // MQTT broker ip
   1883,             // MQTT broker port
   "linus.olofsson@abbindustrigymnasium.se",            // MQTT username
@@ -18,12 +21,13 @@ EspMQTTClient client(
   true              // Enable debug messages
 );
 
-
+//Pins på baskortet definieras. Används till motorn.
 #define motorPinRightDir  0//D2
 #define motorPinRightSpeed 5//D1
 #define motorPinLeftDir 2
 #define motorPinLeftSpeed 4
 
+//Pin för servo definieras. Pinmode sätts för alla pins.
 void setup() {
   servo.attach(14); //D5
   pinMode(motorPinRightDir, OUTPUT);
@@ -33,11 +37,9 @@ void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
   digitalWrite(LED_BUILTIN, LOW);
   Serial.begin(115200);
-  servo.write(0);
-
-  delay(2000);
 }
 
+//Integers för hastighet, körriktning och styrningsvinkel definieras. 
 bool off = false;
 int speed = 0;
 int degrees = 0;
@@ -101,8 +103,12 @@ void drive(bool dir, int speed) {
 
 void onConnectionEstablished(){
 
+  //När meddelande skickas till MQTT-brokern under topicet "speed" utförs det inne i funktionen.
   client.subscribe("linus.olofsson@abbindustrigymnasium.se/speed", [] (const String & payload){
 
+    //Om payloaden börjar på "h-" ska allt från och med det tredje till sista tecknet plockas ut.
+    //De utplockade tecknen blir till en string "value". Integern speed sätts till value gånger 20. 
+    //Integern dir sätts till 0, som är bakåt.
     if (payload.startsWith("h-")){
       char info = payload.charAt(0);
       int length = payload.length();
@@ -111,6 +117,8 @@ void onConnectionEstablished(){
       dir = 0;
       Serial.println(speed);
     } 
+    //Om payloaden börjar på "h" görs samma sak som innan.
+    //Integern dir sätts till 1, som är framåt.
     else if (payload.startsWith("h")){   
       char info = payload.charAt(0);
       int length = payload.length();
@@ -119,14 +127,13 @@ void onConnectionEstablished(){
       dir = 1;
       Serial.println(speed);
     }
+    //Om payloaden börjar på "st" sätts integern speed till 0 (bilen stannar).
     else if (payload.startsWith("st")){   
-      char info = payload.charAt(0);
-      int length = payload.length();
-      String value = payload.substring(1, length);
       speed = 0;
-      Serial.println(degrees);
     };
-    
+
+    //Om payloaden börjar på "s-" ska allt från och med det andra till sista tecknet plockas ut.
+    //De utplockade tecknen blir till en string "value". Integern degrees sätts till value plus 90 grader. 
     if (payload.startsWith("s-")){   
       char info = payload.charAt(0);
       int length = payload.length();
@@ -134,6 +141,7 @@ void onConnectionEstablished(){
       degrees = value.toInt()+90;
       Serial.println(degrees);
     }
+    //Om payloaden börjar på "s" görs samma sak som innan.
     else if (payload.startsWith("s")){   
       char info = payload.charAt(0);
       int length = payload.length();
@@ -141,10 +149,8 @@ void onConnectionEstablished(){
       degrees = value.toInt()+90;
       Serial.println(degrees);
     }
+    //Om payloaden börjar på "st" sätts integern degrees till 90 (hjulen pekar framåt).
     else if (payload.startsWith("st")){   
-      char info = payload.charAt(0);
-      int length = payload.length();
-      String value = payload.substring(1, length);
       degrees = 90;
       Serial.println(degrees);
     }
@@ -154,6 +160,9 @@ void onConnectionEstablished(){
 
 }
 
+//Allt inom denna funktion körs om och om igen.
+//Motorn kör i riktningen "dir" med hastigheten "speed"
+//Servot styr med "degrees" antal grader.
 void loop() {
 
   client.loop();
