@@ -1,5 +1,7 @@
 # Driverbot
 
+En Wi-Fi-styrd bil konstruerad av LEGO och kontrollerad av en mikrokontroller, programmerad i Arduino. Drivningen sker genom en liten elmotor och styrningen via ett servo. Gas, broms och styrning kan regleras i en hemsida skapad i Vue.js. 
+
 ## Loggbok
 
 **23/3:** Lektionen inleddes med att jag kollade på videor i Teams och satte mig in i projektet. Därefter fick jag problem med min motor. Felsökandet av denna drog ut på tiden och slukade en stor del av lektionen. Den sista delen av lektionen satte jag upp en MQTT-broker och började slipa på hemsidan. Jag använde Jockes färdiga hemsida, som jag sedan kommer ändra på gällande både funktion och design utifrån egna önskemål.
