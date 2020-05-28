@@ -229,7 +229,7 @@ export default {
         this.car = "red";
       } else {
         this.car = "blue";
-        this.Send("drive", this.clientId + " har anslutits.");
+        //this.Send("drive", this.clientId + " har anslutits.");
       }
     },
 
@@ -258,7 +258,8 @@ export default {
 };
 </script>
 
-<!-- CSS -->
+<!-- En massa CSS. Bestämmer hur hemsidan ska se ut; layout, färg etc. -->
+
 <style scoped>
 .big {
   font-size: 25px;

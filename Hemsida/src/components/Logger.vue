@@ -3,8 +3,8 @@
     <v-layout row>
       <v-flex class="justify-center mb-6">
         <div class v-if="connected==false">
-          <h1>Kontrolldon till mikrorobot!</h1>
-          <v-img class="img" src="https://media0.giphy.com/media/i3ZOHtBdUsNmE/source.gif" />
+          <h1>Kontrolldon till Driverbot!</h1>
+          <v-img class="img" src="https://media.giphy.com/media/l3vQYPi2ow7YWXQFW/giphy.gif" />
         </div>
 
         <v-card v-else class="mx-auto" max-width="344" outlined>
@@ -59,7 +59,8 @@ export default {
 };
 </script>
 
-<!-- CSS -->
+<!-- En massa CSS. Bestämmer hur hemsidan ska se ut; layout, färg etc. -->
+
 <style scoped>
 .big {
   font-size: 25px;

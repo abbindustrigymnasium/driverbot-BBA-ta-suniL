@@ -50,6 +50,8 @@
 </template>
 
 <script>
+
+//Komponenterna importeras.
 import Buttons2 from "./components/Buttonsv2";
 import Buttons from "./components/Buttons";
 import Logger from "./components/Logger";
@@ -99,6 +101,9 @@ export default {
   computed: {}
 };
 </script>
+
+<!-- En massa CSS. Bestämmer hur hemsidan ska se ut; layout, färg etc. -->
+
 <style scoped>
 .img {
   width: 40%;

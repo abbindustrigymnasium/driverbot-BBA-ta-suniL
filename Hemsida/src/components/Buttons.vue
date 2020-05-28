@@ -1,12 +1,13 @@
 <template>
+<!-- Ett card som innehåller 2 st sliders. -->
   <v-container>
-  <v-card 
-
+    <v-card 
     width="700" 
-    height="400"
+    height="350"
     flat color="white"
-    class="mx-auto"
-    >
+    class="mx-auto">
+  <!-- Den första slidern, kontrollerar hastighet. -->
+  <!-- Går från -50 till 50, i steg om 10. Värdet som väljs skickas till MQTT-brokern -->
   <v-container fluid>
     <v-row>
       <v-col cols="12">
@@ -22,6 +23,8 @@
       </v-col>
     </v-row>
   </v-container>
+  <!-- Den andra slidern, kontrollerar styrning. -->
+  <!-- Går från -90 till 90, i steg om 30. Värdet som väljs skickas till MQTT-brokern -->
   <v-container fluid>
     <v-row>
       <v-col cols="12">
@@ -48,21 +51,16 @@ var mqtt = require("mqtt");
 export default {
   name: "Buttons",
   props: {
-    //Data som skickas in i komponenten
+//Data som skickas in i komponenten
   },
   data() {
-    //All data som ska finnas i komponenten
+//Data som används i komponenten
     return {
       connected: false,
-      car: "green",
       clientId: "notyetAssigned",
       client: null,
       speed: 600,
-      ticklabels: ["Långsamt", "Snabbare", "Snabbast"],
       options: {},
-
-      //speedvalue: "slider",
-      //dirvalue: "slider2",
     };
   },
   computed: {
@@ -132,32 +130,32 @@ export default {
         });
     },
 
+
     Connecting(connected) {
       this.connected = connected;
       this.$store.dispatch("Connect", connected);
-      // console.log(this.connected)
       if (connected == false) {
         this.car = "red";
       } else {
         this.car = "blue";
-        this.Send("drive", this.clientId + " har anslutits.");
+        //this.Send("drive", this.clientId + " har anslutits.");
       }
     },
 
+//Funktion som skickar iväg meddelandet (styr-/körvärden) till MQTT, samt lägger skickar till loggern.
     Send(message) {
-      //console.log(message);
       this.client.publish(
         this.options.username + "/" + this.options.topic,
         message
       );
-
       this.$store.dispatch("addToLogger", message);
     }
   }
 };
 </script>
 
-<!-- CSS -->
+<!-- En massa CSS. Bestämmer hur hemsidan ska se ut; layout, färg etc. -->
+
 <style scoped>
 .big {
   font-size: 25px;
