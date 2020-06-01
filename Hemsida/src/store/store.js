@@ -12,6 +12,7 @@ const state = {
   logger: [],
   connect: false,
   loglimit: 10,
+  //Info om MQTT-brokern. Från Anslutningsalternativ-rutan.
   user: {
     name: "linus.olofsson@abbindustrigymnasium.se",
     password: "robotbil123",

@@ -89,7 +89,7 @@ export default {
   },
   methods: {
 
-//Hallå
+    //Funktion som hämtar värden (namn, lösenord, port osv.) från Store.
     Connect() {
       //https://github.com/mqttjs/MQTT.js/blob/master/README.md
       var ref = this;

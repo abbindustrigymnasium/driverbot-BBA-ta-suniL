@@ -1,14 +1,17 @@
 <template>
   <v-container id="box">
  <span id="hide">    {{Disconnect}}</span>
+    <!-- Card som styrmodulen ligger på. -->
     <v-card class="elevation-12" color="grey lighten-1">
       <v-layout row>
         <v-flex class="justify-center mb-6">
+          <!-- Knapp som lagrar speed-värdet som 25. -->
           <v-btn class="ma-2" v-if="connected" tile color="red" icon @click="speed=25">
             25
             <v-icon>directions_car</v-icon>
           </v-btn>
 
+          <!-- Knapp som skickar styrvärdet 30. -->
           <v-btn
             class="ma-2 rotate-45"
             tile
@@ -20,6 +23,7 @@
           >
             <v-icon>keyboard_arrow_left</v-icon>
           </v-btn>
+          <!-- Knapp för att köra framåt med vald hastighet. -->
           <v-btn
             class="ma-2"
             tile
@@ -31,6 +35,7 @@
           >
             <v-icon>keyboard_arrow_up</v-icon>
           </v-btn>
+          <!-- Knapp som skickar styrvärdet -30. -->
           <v-btn
             class="ma-2 rotate-135"
             tile
@@ -42,7 +47,7 @@
           >
             <v-icon>keyboard_arrow_left</v-icon>
           </v-btn>
-
+          <!-- Knapp som lagrar speed-värdet som 35. -->
           <v-btn class="ma-2" tile v-if="connected" color="blue" icon @click="speed=35">
             35
             <v-icon>directions_car</v-icon>
@@ -51,6 +56,7 @@
       </v-layout>
       <v-layout row>
         <v-flex md6>
+          <!-- Knapp som skickar styrvärdet 60. -->
           <v-btn
             class="ma-2"
             tile
@@ -64,14 +70,17 @@
           </v-btn>
         </v-flex>
         <v-flex md6>
+          <!-- Knapp för att starta modulen/loggern. -->
           <v-btn v-if="!connected" class="ma-2" tile large :color="car" icon @click="Connect()">
             <v-icon>directions_car</v-icon>
           </v-btn>
+          <!-- Knapp som stannar bilen. -->
           <v-btn v-else class="ma-2" tile large :color="car" icon @click="Send('stop')">
             <v-icon>pause</v-icon>
           </v-btn>
         </v-flex>
         <v-flex md6>
+          <!-- Knapp som skickar styrvärdet -60. -->
           <v-btn
             class="ma-2"
             tile
@@ -87,10 +96,12 @@
       </v-layout>
       <v-layout row>
         <v-flex class="justify-center mb-6">
+          <!-- Knapp som lagrar speed-värdet som 40. -->
           <v-btn class="ma-2" v-if="connected" tile color="green" icon @click="speed=40">
             40
             <v-icon>directions_car</v-icon>
           </v-btn>
+          <!-- Knapp som skickar styrvärdet 90. -->
           <v-btn
             class="ma-2 rotate-45"
             tile
@@ -102,6 +113,7 @@
           >
             <v-icon>keyboard_arrow_down</v-icon>
           </v-btn>
+          <!-- Knapp för att backa med vald hastighet. -->
           <v-btn
             class="ma-2"
             tile
@@ -113,6 +125,7 @@
           >
             <v-icon>keyboard_arrow_down</v-icon>
           </v-btn>
+          <!-- Knapp som skickar styrvärdet -90. -->
           <v-btn
             class="ma-2 rotate-135"
             tile
@@ -124,7 +137,7 @@
           >
             <v-icon>keyboard_arrow_up</v-icon>
           </v-btn>
-
+          <!-- Knapp som lagrar speed-värdet som 50. -->
           <v-btn class="ma-2" tile v-if="connected" color="purple" icon @click="speed=50">
             50
             <v-icon>directions_car</v-icon>
@@ -180,7 +193,7 @@ export default {
     }
   },
   methods: {
-    //Metoder
+    //Funktion som hämtar värden (namn, lösenord, port osv.) från Store.
     Connect() {
       let ref = this;
       if (this.connected == true) {

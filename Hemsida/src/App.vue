@@ -69,6 +69,7 @@ export default {
     Buttons2,
     Logger
   },
+  //All data som används.
   data() {
     return {
       Switch: false,
@@ -90,6 +91,8 @@ export default {
   },
 
   methods: {
+    //Funktion som stoppar infon från Anslutningsalternativ i ett JSON-objekt. 
+    //Skickar sedan till store. Dialog = false gör att rutan stängs.
     save() {
       let User = {
         name: this.name,
