@@ -84,11 +84,12 @@ export default {
     }
   },
    created() {
-    //När komponenten är skapad
+  //När komponenten är skapad
     this.Connect()
   },
   methods: {
-    //Metoder
+
+//Hallå
     Connect() {
       //https://github.com/mqttjs/MQTT.js/blob/master/README.md
       var ref = this;
@@ -130,7 +131,7 @@ export default {
         });
     },
 
-
+//Funktion som ändrar färg på bil-knappen. Röd om man inte är ansluten, annars blå.
     Connecting(connected) {
       this.connected = connected;
       this.$store.dispatch("Connect", connected);

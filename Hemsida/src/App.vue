@@ -1,11 +1,14 @@
 <template>
   <v-app id="content">
+    <!-- Toolbaren och dess rubrik -->
     <v-toolbar app id="toolbar">
       <v-toolbar-title class="headline text-uppercase">
         <span>Driver</span>
         <span class="font-weight-light">bot</span>
       </v-toolbar-title>
 
+      <!-- Knapparna i toolbaren. När man klickar på "Anslutningsalternativ" ska en ruta komma upp. -->
+      <!-- När man klickar på "Sliders"-knappen ändras sidan och knappens text ändras till "Buttons". -->
       <v-spacer></v-spacer>
       <v-btn color="primary" dark @click.stop="dialog = true">Anslutningsalternativ</v-btn>
       <v-btn target="_blank" @click="Switch=!Switch">
@@ -14,6 +17,8 @@
       </v-btn>
     </v-toolbar>
 
+    <!-- Rutan som kommer upp när man klickar på "Anslutningsalternativ". Storlek bestäms samt rubriker till textfälten. -->
+    <!-- Även spara-knappen läggs till. -->
     <v-content>
       <v-row align="center" justify="center">
         <v-dialog v-model="dialog" max-width="400" height="290">
@@ -41,6 +46,7 @@
         <div>
           <Logger />
 
+          <!-- Om knappens läge är "Switch" ska "Buttons"-sidan visas. Annars visas "Buttons2". -->
           <Buttons v-if="Switch" />
           <Buttons2 v-else />
         </div>

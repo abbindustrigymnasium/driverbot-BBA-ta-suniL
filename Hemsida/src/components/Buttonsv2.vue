@@ -233,6 +233,7 @@ export default {
       }
     },
 
+//Funktion som ändrar färg på bil-knappen. Röd om man inte är ansluten, annars blå.
     Connecting(connected) {
       this.connected = connected;
       this.$store.dispatch("Connect", connected);
@@ -245,6 +246,7 @@ export default {
       }
     },
 
+//Funktion som skickar iväg meddelandet (styr-/körvärden) till MQTT, samt lägger skickar till loggern.
     Send(message) {
       // console.log(message);
       this.client.publish(
